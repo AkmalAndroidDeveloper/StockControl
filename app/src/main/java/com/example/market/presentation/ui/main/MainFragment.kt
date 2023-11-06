@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {
 
-    private lateinit var binding: FragmentMainBinding
+    private lateinit var _binding: FragmentMainBinding
     private lateinit var childNavController: NavController
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -25,7 +25,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         binding.bottomNavigationView.menu.findItem(R.id.fragment_statistics).isChecked = false
 
         childNavController =
-            (childFragmentManager.findFragmentById(R.id.fragmentContainerMain)as NavHostFragment).navController
+            (childFragmentManager.findFragmentById(R.id.fragmentContainerMain) as NavHostFragment).navController
 
         binding.bottomNavigationView.setupWithNavController(childNavController)
 
@@ -38,10 +38,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun initListeners() {
-        BottomNavigationViewVisibilityLiveData.observe(viewLifecycleOwner){
+        BottomNavigationViewVisibilityLiveData.observe(viewLifecycleOwner) {
             binding.bottomAppBar.visibility = it
         }
-        FloatActionButtonVisibilityLiveData.observe(viewLifecycleOwner){
+        FloatActionButtonVisibilityLiveData.observe(viewLifecycleOwner) {
             binding.btnAddProduct.visibility = it
         }
 
@@ -64,9 +64,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             value = visibility
         }
     }
+
     object FloatActionButtonVisibilityLiveData : MutableLiveData<Int>() {
         fun setVisibility(visibility: Int) {
             value = visibility
         }
     }
-    }
+}
